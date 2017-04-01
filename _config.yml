@@ -37,21 +37,15 @@ fb_page_id:
 # (leave blank to disable Disqus)
 disqus_shortname:
 
-# Facebook Comments plugin
-# (leave blank to disable Facebook Comments, otherwise set it to true)
-facebook_comments:
-facebook_appid:
-facebook_comments_number: 10
-
 # Social icons
-github_username:
+github_username: levithatcher
 bitbucket_username:
 stackoverflow_id:
-twitter_username:
+twitter_username: levithatcher
 skype_username:
 steam_nickname:
 google_plus_id:
-linkedin_username:
+linkedin_username: levithatcher
 angellist_username:
 medium_id:
 bitcoin_url:
