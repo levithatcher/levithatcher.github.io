@@ -9,12 +9,12 @@ categories: d3
 I’ve started this blog to help organize my thoughts relative to data science, machine learning, statistics, logic-based analysis, and various visualization tools. The focus will be on data-related tools and techniques. While I’ll keep these posts applicable to a wide (data-interested) audience, I’m sure the analysis will occasionally focus on Salt Lake City, where I’m currently based.
 
 To kick things off, I wanted to post a choropleth I’ve made using [D3](https://d3js.org/), showing diabetes rates for each county in the US. D3, or data-driven documents, is a Javascript library used to make browser-based and data-driven plots. Developed by Mike Bostock, D3 is free, interactive, and (with a little work) creates fantastic visualizations. While I used Python’s matplotlib and the latter’s [basemap](http://matplotlib.org/basemap/users/intro.html) package in grad school to make geographic figures of the earth and atmosphere, I always wanted a tool that easily plotted data related to finer scale political boundaries. Its ability to make such maps is one first things that caught my eye about D3.
+
 To provide a flavor of what Python-based geo-centric maps can do, here’s a plot of composite hurricane environments with atmospheric water vapor data overlaid, all using basemap (click to zoom):
 
 ![Basemap](/images/basemap_fourpanel.png)
 
 And here’s [diabetes rates](http://www.cdc.gov/diabetes/atlas/countydata/County_ListofIndicators.html) by county throughout the US.
-
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
@@ -34,7 +34,7 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.selectAll("div#example").append("svg")
+var svg = d3.selectAll("div#example").selectAll("svg")
     .attr("width", width)
     .attr("height", height);
     
@@ -65,12 +65,12 @@ function ready(error, us) {
       //console.log(rateById.get(d.id));
 
   svg.append("path")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .datum(topojson.mesh(us.county, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path)
 }
 
-d3.select(div#example).style("height", height + "px").selectAll("svg");
+//d3.select(div#example).style("height", height + "px").selectAll("svg");
 </script>
 <div id="example"></div>
 
