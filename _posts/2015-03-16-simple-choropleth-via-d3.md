@@ -10,7 +10,7 @@ I’ve started this blog to help organize my thoughts relative to data science, 
 
 To kick things off, I wanted to post a choropleth I’ve made using [D3](https://d3js.org/), showing diabetes rates for each county in the US. D3, or data-driven documents, is a Javascript library used to make browser-based and data-driven plots. Developed by Mike Bostock, D3 is free, interactive, and (with a little work) creates fantastic visualizations. While I used Python’s matplotlib and the latter’s [basemap](http://matplotlib.org/basemap/users/intro.html) package in grad school to make geographic figures of the earth and atmosphere, I always wanted a tool that easily plotted data related to finer scale political boundaries. Its ability to make such maps is one first things that caught my eye about D3.
 
-To provide a flavor of what Python-based geo-centric maps can do, here’s a plot of composite hurricane environments with atmospheric water vapor data overlaid, all using basemap (click to zoom):
+To provide a flavor of what Python-based geo-centric maps can do, here’s a plot of composite hurricane environments with atmospheric water vapor data overlaid, all using basemap:
 
 ![Basemap](/images/basemap_fourpanel.png)
 
@@ -34,7 +34,7 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.selectAll("div#example").selectAll("svg")
+var svg = d3.selectAll("div#example").append("svg")
     .attr("width", width)
     .attr("height", height);
     
