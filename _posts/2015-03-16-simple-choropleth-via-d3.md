@@ -39,7 +39,7 @@ var svg = d3.select("div#example").selectAll("svg")
     .attr("width", width)
     .attr("height", height);
     
-queue()
+d3.queue()
     .defer(d3.json, "/data/us.json")
     .defer(d3.csv, "/data/diabetes_2012.csv", function(d) { rateById.set(d.id, +d.rate); })
     .await(ready);
