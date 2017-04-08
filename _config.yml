@@ -1,10 +1,10 @@
 # Site settings
-title:       Levi being deliberate
+title:       Levi being
 email:       levithatcher@gmail.com
 author:      Levi Thatcher
 description: "A blog on machine learning, often for healthcare."
 baseurl:     ""
-url:         "http://levithatcher.com"
+url:         "http://levithatcher.github.io"
 date_format: "%b %-d, %Y"
 
 # Site owner
