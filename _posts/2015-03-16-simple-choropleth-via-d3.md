@@ -65,7 +65,7 @@ function ready(error, us) {
       //console.log(rateById.get(d.id));
 
   svg.append("path")
-      .datum(topojson.mesh(us.county, us.objects.states, function(a, b) { return a !== b; }))
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path)
 }
