@@ -11,11 +11,68 @@ I’ve started this blog to help organize my thoughts relative to data science, 
 To kick things off, I wanted to post a choropleth I’ve made using [D3](https://d3js.org/), showing diabetes rates for each county in the US. D3, or data-driven documents, is a Javascript library used to make browser-based and data-driven plots. Developed by Mike Bostock, D3 is free, interactive, and (with a little work) creates fantastic visualizations. While I used Python’s matplotlib and the latter’s [basemap](http://matplotlib.org/basemap/users/intro.html) package in grad school to make geographic figures of the earth and atmosphere, I always wanted a tool that easily plotted data related to finer scale political boundaries. Its ability to make such maps is one first things that caught my eye about D3.
 To provide a flavor of what Python-based geo-centric maps can do, here’s a plot of composite hurricane environments with atmospheric water vapor data overlaid, all using basemap (click to zoom):
 
-Basemap
+![Basemap](/images/basemap_fourpanel.png)
 
 And here’s [diabetes rates](http://www.cdc.gov/diabetes/atlas/countydata/County_ListofIndicators.html) by county throughout the US.
 
-D3
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+var width = 450,
+    height = 300;
+
+var rateById = d3.map();
+
+var quantize = d3.scale.quantize()
+    .domain([0, .15])
+    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+var projection = d3.geo.albersUsa()
+    .scale(640)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.selectAll("div#example").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+queue()
+    .defer(d3.json, "/data/us.county.json")
+    .defer(d3.csv, "/data/diabetes_2012.csv", function(d) { rateById.set(d.id, +d.rate); })
+    .await(ready);
+
+function ready(error, us) {
+  svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+      .enter().append("path")
+      .attr("class", function(d) { return quantize(rateById.get(d.id)); })
+      .attr("d", path)
+      .on("mouseover", function(d) {
+        d3.select(this.parentNode.appendChild(this)).transition().duration(300)
+        .style({'stroke-opacity':1,'stroke':'#F00'})
+      })
+      .on("mouseout", function(d) {
+        d3.select(this.parentNode.appendChild(this)).transition().duration(300)
+        .style({'stroke-opacity':0.2,'stroke':'#eee'})
+      })
+     .append("svg:title")
+       .text(function(d) {  return rateById.get(d.id); });
+     
+      //console.log(rateById.get(d.id));
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "states")
+      .attr("d", path)
+}
+
+d3.select(div#example).style("height", height + "px").selectAll("svg");
+</script>
+<div id="example"></div>
 
 While the atmospheric data is on a finer scale of 3 km, the D3 image is based on county-level data. One of the great things about the D3 image, however, is that it simply reads from a csv file and any county-level data can easily be substituted in (and there’s no need for a corresponding lat/lon component, as in the basemap plot).
 
