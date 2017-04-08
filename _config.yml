@@ -5,6 +5,7 @@ author:      Levi Thatcher
 description: "A blog on machine learning, often for healthcare."
 baseurl:     ""
 url:         "http://levithatcher.github.io"
+permalink:   "/:year/:month/:day/:title.html"
 date_format: "%b %-d, %Y"
 
 # Site owner
