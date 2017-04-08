@@ -34,7 +34,7 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.selectAll("div#example").append("svg")
+var svg = d3.select("div#example").selectAll("svg")
     .attr("width", width)
     .attr("height", height);
     
