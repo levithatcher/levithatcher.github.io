@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      Simple choropleth via d3
+title:      Simple choropleth via D3
 date:       2015-03-16 11:00:00
 summary:    Using d3 to build a county-level US map of any metric 
-categories: d3
+categories: D3
 ---
 
 I’ve started this blog to help organize my thoughts relative to data science, machine learning, statistics, logic-based analysis, and various visualization tools. The focus will be on data-related tools and techniques. While I’ll keep these posts applicable to a wide (data-interested) audience, I’m sure the analysis will occasionally focus on Salt Lake City, where I’m currently based.
