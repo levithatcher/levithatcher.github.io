@@ -16,7 +16,7 @@ To provide a flavor of what Python-based geo-centric maps can do, here’s a plo
 
 And here’s [diabetes rates](http://www.cdc.gov/diabetes/atlas/countydata/County_ListofIndicators.html) by county throughout the US.
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 var width = 450,
     height = 300;
